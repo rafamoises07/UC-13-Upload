@@ -19,11 +19,5 @@ router.get("/", PictureController.findAll);
 // Definindo a rota GET para obter uma imagem especifica
 router.get("/:id/image", PictureController.getImage);
 
-// Definindo a rota DELETE para apagar as imagens
-router.delete("/:id", PictureController.remove)
-
-// Definindo a rota PUT para atualizar as imagens
-router.put("/:id", upload.single("file"), PictureController.update);
-
 // Exportando o arquivo para utilizar no app.js
 module.exports = router;
