@@ -99,6 +99,8 @@ h1 {
 
 .photo-info {
   padding: 15px;
+  display: grid;
+  grid-template-columns: 1fr auto;
 }
 
 .photo-name {
