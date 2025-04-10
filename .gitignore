@@ -1,0 +1,19 @@
+# Arquivos de Log
+logs
+*.log
+npm-debug.log
+
+# Dados de tempo execução
+pids
+*.pids
+*.seed
+
+# Diretorios de dependencias
+node_modules/
+
+# Arquivos de build
+dist/
+build/
+
+# Variaveis de ambiente
+.env
