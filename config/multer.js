@@ -1,16 +1,16 @@
-// Importanto o multer, um middleware para upload de arquivos
+// Importando multer, upload de arquivos
 const multer = require("multer");
- 
-// Configuração do Multer para salvar em memória
+
+// Configuração do Multer para armazenamento em memória
 const storage = multer.memoryStorage();
 
-// middleware do multer para upload de img
-const upload = multer ({
+// Middleware do Multer
+const upload = multer({ 
     storage,
     limits: {
-        fileSize: 5 * 1024 * 1024, //limite de 5mb
-    },
+        fileSize: 5 * 1024 * 1024 // Limite de 5MB
+    }
 });
- 
-// Exportando o middleware para uso em outros arquivos
+
+// Exporta para utilizar em outro arquivo
 module.exports = upload;
