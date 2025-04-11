@@ -63,3 +63,22 @@ exports.getImage = async (req, res) => {
     res.status(500).json({ message: "Erro ao buscar imagem!" });
   }
 };
+
+// Função para deletar uma imagem específica
+exports.delete = async (req, res) => {
+  try {
+    // Deleta a imagem do DB pelo ID fornecido
+    const picture = await Picture.findByIdAndDelete(req.params.id);
+
+    // Se a imagem não foi encontrada, retorna erro 404
+    if (!picture) {
+      return res.status(404).json({ message: "Imagem não encontrada" });
+    }
+
+    // Retorna uma mensagem de sucesso
+    res.json({ message: "Imagem deletada com sucesso!" });
+  } catch (error) {
+    // Caso ocorra erro, retorna para o usuario
+    res.status(500).json({ message: "Erro ao deletar imagem!" });
+  }
+};

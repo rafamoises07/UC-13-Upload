@@ -55,7 +55,7 @@ h1 {
   background-color: #2980b9;
 }
 
-.btn-delete {
+.delete-btn {
   background-color: #e74c3c;
   color: white;
   border: none;
@@ -65,7 +65,7 @@ h1 {
   transition: background-color 0.3s;
 }
 
-.btn-delete:hover {
+.delete-btn:hover {
   background-color: #c0392b;
 }
 

@@ -86,18 +86,44 @@ const elements = {
     // Monta a URL (API + ID da foto + /image)
     const imageUrl = `${config.apiUrl}/${photo._id}/image`;
   
-    // Define o HTML interno do card (Imagem e informação)
-    card.innerHTML = `
-           <img src="${imageUrl}" alt="${photo.name}"
-                onerror="this.onerror=null; this.src='${config.placeholderImage}'">
-           <div class="photo-info">
-               <div class="photo-name">${photo.name}</div>
-               <div class="delete-button"><button id="deleteBtn" class="btn-delete">Excluir</button></div>
-           </div>
-           `;
-  
-    return card;
+     // Define o HTML interno do card (Imagem e informação)
+     card.innerHTML = `
+     <img src="${imageUrl}" alt="${photo.name}"
+          onerror="this.onerror=null; this.src='${config.placeholderImage}'">
+     <div class="photo-info">
+         <div class="photo-name">${photo.name}</div>
+         <div class="photo-actions">
+          <button class="delete-btn" onclick="deletePhoto('${photo._id}')">Excluir</button>
+          </div>
+     </div>
+     `;
+
+return card;
+}
+// Função para deletar uma foto do banco de dados
+async function deletePhoto(photoId) {
+  try {
+      // Faz a requisição DELETE para a API
+      const response = await fetch(`${config.apiUrl}/${photoId}`, {
+          method: "DELETE",
+      });
+
+      // Verifica se a resposta foi bem-sucedida
+      if (!response.ok) {
+          throw new Error("Erro ao deletar a foto");
+      }
+
+      // Exibe uma notificação de sucesso
+      showNotification("Foto deletada com sucesso!");
+
+      // Recarrega a lista de fotos para atualizar o grid
+      loadAndDisplayPhotos();
+  } catch (error) {
+      // Mostra o erro no console e exibe uma notificação de erro
+      console.error("Erro ao deletar a foto:", error);
+      showNotification("Falha ao deletar a foto", "error");
   }
+}
   
   // Função de gerenciamento (CRUD), envia a foto para o servidor com o FormData
   async function uploadNewPhoto(formData) {
