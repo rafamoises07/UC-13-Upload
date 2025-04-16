@@ -100,31 +100,58 @@ const elements = {
 
 return card;
 }
-// Função para deletar uma foto do banco de dados
-async function deletePhoto(photoId) {
+// Função delete para excluir uma foto da galeria e do banco de dados
+/*async function deletePhoto(photoId) {
   try {
       // Faz a requisição DELETE para a API
       const response = await fetch(`${config.apiUrl}/${photoId}`, {
           method: "DELETE",
       });
 
-      // Verifica se a resposta foi bem-sucedida
+      // Verifica se a foto foi excluida
       if (!response.ok) {
           throw new Error("Erro ao deletar a foto");
       }
 
-      // Exibe uma notificação de sucesso
+      // Exibe uma notificação de que a foto foi excluida
       showNotification("Foto deletada com sucesso!");
 
-      // Recarrega a lista de fotos para atualizar o grid
+      // Atualiza a galeria apos a remoção da foto
       loadAndDisplayPhotos();
   } catch (error) {
-      // Mostra o erro no console e exibe uma notificação de erro
+      // Mostra o erro no console 
       console.error("Erro ao deletar a foto:", error);
+      // Exibe uma notificação caso não consiga excluir a foto
       showNotification("Falha ao deletar a foto", "error");
   }
-}
+}*/
+   // Envia a requisição DELETE para a API para remover a foto
+   async function deletePhoto(photoId) {
+    try {
+      // Envia a requisição DELETE para a API para remover a foto
+      const response = await fetch(`${config.apiUrl}/${photoId}`, {
+        method: "DELETE",
+      });
   
+      // Verifica se a requisição foi bem-sucedida
+      if (!response.ok) {
+        throw new Error("Falha ao deletar a foto");
+      }
+  
+      // Exibe notificação de sucesso
+      showNotification("Foto deletada com sucesso!");
+  
+      // Recarrega as fotos da galeria após a exclusão
+      loadAndDisplayPhotos();
+    } catch (error) {
+      // Exibe o erro no console para depuração
+      console.error("Erro ao deletar a foto:", error);
+  
+      // Exibe notificação de erro caso a exclusão falhe
+      showNotification("Não foi possível deletar a foto", "error");
+    }
+  }
+
   // Função de gerenciamento (CRUD), envia a foto para o servidor com o FormData
   async function uploadNewPhoto(formData) {
     try {
